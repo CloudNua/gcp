@@ -1,15 +1,17 @@
+
+
 // Configure the Google Cloud resources
 resource "google_container_cluster" "primary" {
-  name                     = "gitops-demo-gke"
-  location                 = "europe-west1-a"
+  name                     = "${local.cluster_name}"
+  location                 = "europe-west1-b"
   remove_default_node_pool = true
   initial_node_count       = 1
 
 }
 
 resource "google_container_node_pool" "primary_preemptible_nodes" {
-  name       = "my-node-pool"
-  location   = "europe-west1-a"
+  name       = "${local.cluster_name}-node-pool"
+  location   = "europe-west1-b"
   cluster    = google_container_cluster.primary.name
   node_count = 2
 

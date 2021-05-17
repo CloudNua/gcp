@@ -8,8 +8,8 @@ include:
 
 # Using protected pipeline variable for initial deployment
 variables:
-  GCP_CREDS: $GCP_CREDS
-  GCP_PROJECT: $GCP_PROJECT
+  GCP_CREDENTIALS: $GCP_CREDENTIALS
+  GCP_PROJECT_ID: $GCP_PROJECT_ID
   GCP_REGION: $GCP_REGION
   GITLAB_TOKEN: $GITLAB_TOKEN
 
