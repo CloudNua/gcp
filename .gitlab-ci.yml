@@ -1,0 +1,20 @@
+image: alpine:latest
+
+include:
+  - project: 'cloudnua-public/gitops/infra/templates'
+    ref: main
+    file:
+      - '/terraform.gitlab-ci.yml'
+
+# Using protected pipeline variable for initial deployment
+variables:
+  GCP_CREDS: $GCP_CREDS
+  GCP_PROJECT: $GCP_PROJECT
+  GCP_REGION: $GCP_REGION
+  GITLAB_TOKEN: $GITLAB_TOKEN
+
+# Using protected pipeline variable for initial deployment
+before_script:
+  - echo "Initialise GCP GKE Stack...START!"
+after_script:
+  - echo ""Initialise GCP GKE Stack...DONE!""
