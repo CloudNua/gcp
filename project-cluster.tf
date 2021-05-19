@@ -1,5 +1,5 @@
 data "gitlab_group" "gitops-demo-apps" {
-  full_path = "cloudnua-public/gitops/apps"
+  full_path = "gitops-cloudnua/apps"
 }
 
 data "gitlab_projects" "cluster-management-search" {
@@ -12,16 +12,16 @@ data "gitlab_projects" "cluster-management-search" {
 }
 
 data "gitlab_project" "gitops-demo-apps" {
-  id = "cloudnua-public/gitops/apps/ml-forecast"
+  id = "gitops-cloudnua/apps/ml-forecast"
 }
 
-resource "gitlab_project_cluster" "aws_cluster" {
+resource "gitlab_project_cluster" "gcp_cluster" {
   project               = data.gitlab_project.gitops-demo-apps.id
-  name                  = module.eks.cluster_id
-  domain                = "gitops-demo.cloudnua.com"
+  name                  = module.gke.name
+  domain                = "gke-gitops.cloudnua.com"
   environment_scope     = "gke/*"
-  kubernetes_api_url    = module.eks.cluster_endpoint
+  kubernetes_api_url    = "https://${module.gke.endpoint}"
   kubernetes_token      = data.kubernetes_secret.gitlab-admin-token.data.token
-  kubernetes_ca_cert    = trimspace(base64decode(module.eks.cluster_certificate_authority_data))
+  kubernetes_ca_cert    = trimspace(base64decode(module.gke.ca_certificate))
   management_project_id = data.gitlab_projects.cluster-management-search.projects.0.id
 }

@@ -1,7 +1,9 @@
 terraform {
+  required_version = ">= 0.12"
+
   required_providers {
     google = {
-      source  = "hashicorp/google"
+      source = "hashicorp/google"
     }
 
     gitlab = {
@@ -9,8 +11,7 @@ terraform {
     }
 
     kubernetes = {
-      source  = "hashicorp/kubernetes"
-      version = ">= 2.0.1"
+      source = "hashicorp/kubernetes"
     }
 
     random = {
@@ -34,5 +35,4 @@ terraform {
     }
 
   }
-  required_version = ">= 0.14"
 }
