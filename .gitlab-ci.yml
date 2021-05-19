@@ -16,5 +16,6 @@ variables:
 # Using protected pipeline variable for initial deployment
 before_script:
   - echo "Initialise GCP GKE Stack...START!"
+  - export GOOGLE_APPLICATION_CREDENTIALS=${GCP_CREDENTIALS}
 after_script:
   - echo ""Initialise GCP GKE Stack...DONE!""
