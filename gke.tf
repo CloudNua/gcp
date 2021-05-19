@@ -82,4 +82,6 @@ module "gke" {
 
 output "env-dynamic-url" {
   value = "https://${module.gke.endpoint}"
+  # sensitive must be true when referencing a sensitive input variable
+  sensitive = true
 }
