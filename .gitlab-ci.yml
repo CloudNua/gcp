@@ -8,14 +8,17 @@ include:
 
 # Using protected pipeline variable for initial deployment
 variables:
-  GCP_CREDENTIALS: $GCP_CREDENTIALS
-  GCP_PROJECT_ID: $GCP_PROJECT_ID
-  GCP_REGION: $GCP_REGION
+  GCP_CREDENTIALS: $GCP_CRED
+  GCP_PROJECT_ID: $GCP_PROJ_ID
+  GCP_REGION: $GCP_REG
   GITLAB_TOKEN: $GITLAB_TOKEN
 
 # Using protected pipeline variable for initial deployment
 before_script:
   - echo "Initialise GCP GKE Stack...START!"
-  - export GOOGLE_APPLICATION_CREDENTIALS=${GCP_CREDENTIALS}
+  - echo $GCP_CREDENTIALS | base64 -d > gcp-key.json
+  - export TF_CREDS=gcp-key.json
+  - export GOOGLE_APPLICATION_CREDENTIALS=${TF_CREDS}
 after_script:
+  - rm gcp-key.json
   - echo ""Initialise GCP GKE Stack...DONE!""
