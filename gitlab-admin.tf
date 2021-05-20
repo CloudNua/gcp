@@ -1,15 +1,10 @@
-data "google_client_config" "current" {}
-
-# provider "kubernetes" {
-#   host                   = google_container_cluster.primary.endpoint
-#   cluster_ca_certificate = base64decode(google_container_cluster.primary.master_auth.0.cluster_ca_certificate)
-#   token                  = data.google_client_config.current.access_token
-# }
+data "google_client_config" "default" {}
 
 provider "kubernetes" {
   host                   = "https://${module.gke.endpoint}"
   cluster_ca_certificate = base64decode(module.gke.ca_certificate)
-  token                  = data.google_client_config.current.access_token
+  token                  = data.google_client_config.default.access_token
+  load_config_file       = false
 }
 
 resource "kubernetes_service_account" "gitlab-admin" {
