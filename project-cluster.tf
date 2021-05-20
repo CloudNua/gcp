@@ -1,5 +1,5 @@
 data "gitlab_group" "gitops-demo-apps" {
-  full_path = "gitops-cloudnua/apps"
+  full_path = "cloudnua-public/gitops/apps"
 }
 
 data "gitlab_projects" "cluster-management-search" {
@@ -12,7 +12,7 @@ data "gitlab_projects" "cluster-management-search" {
 }
 
 data "gitlab_project" "gitops-demo-apps" {
-  id = "gitops-cloudnua/apps/ml-forecast"
+  id = "cloudnua-public/gitops/apps/ml-forecast"
 }
 
 resource "gitlab_project_cluster" "gcp_cluster" {
