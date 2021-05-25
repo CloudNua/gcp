@@ -1,5 +1,3 @@
-image: alpine:latest
-
 include:
   - project: 'cloudnua-public/gitops/infra/templates'
     ref: main
