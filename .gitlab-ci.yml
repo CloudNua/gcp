@@ -4,7 +4,7 @@ include:
   - project: 'cloudnua-public/gitops/infra/templates'
     ref: main
     file:
-      - '/terraform.gitlab-ci.yml'
+      - '/terraform-gcp.gitlab-ci.yml'
 
 # Using protected pipeline variable for initial deployment
 variables:
